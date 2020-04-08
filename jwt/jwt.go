@@ -30,7 +30,7 @@ func GenToken(payload interface{}) (AuthTokenObject, error) {
 	}
 
 	return AuthTokenObject{
-		Token:    token,
+		Token:    AuthToken(token),
 		ExpireAt: expireAt,
 		Payload:  payload,
 	}, nil
