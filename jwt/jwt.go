@@ -13,12 +13,12 @@ func GenToken(payload interface{}) (AuthTokenObject, error) {
 
 	/* Create Token */
 	jwtToken := jwtgo.New(jwtgo.SigningMethodHS256)
-	expireAt := time.Now().Add(time.Second * 3600).Unix()
+	expireAt := time.Now().Add(time.Second * 3600)
 
 	/* Set token claims */
 	jwtToken.Claims = jwtgo.MapClaims{
 		"payload": payload,
-		"exp":     expireAt,
+		"exp":     expireAt.Unix(),
 		"iss":     "jwt-issuer",
 	}
 
@@ -31,8 +31,7 @@ func GenToken(payload interface{}) (AuthTokenObject, error) {
 
 	return AuthTokenObject{
 		Token:    AuthToken(token),
-		ExpireAt: expireAt,
+		ExpireAt: expireAt.String(),
 		Payload:  payload,
 	}, nil
-
 }
