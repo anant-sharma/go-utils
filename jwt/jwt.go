@@ -31,7 +31,7 @@ func GenToken(payload interface{}) (AuthTokenObject, error) {
 
 	return AuthTokenObject{
 		Token:    AuthToken(token),
-		ExpireAt: expireAt.String(),
+		ExpireAt: expireAt.Format(time.RFC3339),
 		Payload:  payload,
 	}, nil
 }
