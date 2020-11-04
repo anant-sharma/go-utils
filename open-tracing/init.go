@@ -23,9 +23,9 @@ func NewTracer(ctx context.Context, serviceName string) (otracing.Tracer, io.Clo
 			Param: 1,
 		},
 		Reporter: &config.ReporterConfig{
-			LogSpans:            true,
-			BufferFlushInterval: 1 * time.Second,
-			CollectorEndpoint:   "http://instance.chipserver.ml:14268/api/traces",
+			LogSpans:            false,
+			BufferFlushInterval: 15 * time.Second,
+			CollectorEndpoint:   "http://instance.chipserver.in:14268/api/traces",
 		},
 	}
 	return cfg.New(
