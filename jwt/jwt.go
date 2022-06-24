@@ -6,10 +6,8 @@ import (
 	jwtgo "github.com/dgrijalva/jwt-go"
 )
 
-var myJwtSigningKey = []byte("jwt-secret")
-
 // GenToken - A Util function to generate jwtToken which can be used in the request header
-func GenToken(payload interface{}) (AuthTokenObject, error) {
+func GenToken(payload interface{}, secret string) (AuthTokenObject, error) {
 
 	expireAt := time.Now().Add(time.Second * 3600)
 
@@ -25,7 +23,7 @@ func GenToken(payload interface{}) (AuthTokenObject, error) {
 	jwtToken := jwtgo.NewWithClaims(jwtgo.SigningMethodHS256, claims)
 
 	/* Sign the token with our secret */
-	token, err := jwtToken.SignedString(myJwtSigningKey)
+	token, err := jwtToken.SignedString([]byte(secret))
 
 	if err != nil {
 		return AuthTokenObject{}, err

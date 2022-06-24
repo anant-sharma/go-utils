@@ -7,11 +7,11 @@ import (
 )
 
 // Parse - Function to Parse JWT
-func Parse(tokenObj AuthTokenObject) (AuthTokenObject, error) {
+func Parse(tokenObj AuthTokenObject, secret string) (AuthTokenObject, error) {
 	claims := &Claims{}
 
 	token, err := jwtgo.ParseWithClaims(tokenObj.Token, claims, func(token *jwtgo.Token) (interface{}, error) {
-		return myJwtSigningKey, nil
+		return []byte(secret), nil
 	})
 
 	if err != nil {
